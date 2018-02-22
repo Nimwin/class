@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Text Editor V1.0</title>
+	<script type="text/javascript" src='angular.js'></script>
+	<script type="text/javascript" src='jquery-3.1.1.js'></script>
+
+	<style>
+		body {
+		  background: #2a2a2b;
+		  color: #fff;
+		  text-align: center;
+		  font-family: Helvetica;
+		}
+
+		.small {
+		  font-size: .7em;
+		}
+
+		.dropdown {
+		  position: relative;
+		  display: inline-block;
+		  vertical-align: middle;
+		  margin: 10px 0px;
+
+		}
+
+		.dropdown select {
+		  background-color: #1abc9c;
+		  color: #fff;
+		  font-size: inherit;
+		  padding: .5em;
+		  padding-right: 0.5em;	
+		  border: 0;
+		  margin: 0;
+		  border-radius: 3px;
+		  text-indent: 0.01px;
+		  text-overflow: '';
+		  cursor: pointer;
+		  width: 110px;
+		}
+
+		.btn{
+			background-color: #1abc9c;
+			padding: 5px 9px;
+			text-align: center;
+			display: inline-block;
+			cursor: pointer;
+			border: none;
+			margin: 4px 0px;
+			border-radius: 4px;
+			transition-duration: 0.2s;
+			color: white;
+		}
+
+		.btn:hover{
+			border: 2px solid white;
+		}
+
+		.btn:active{
+			transform: translateY(1px);
+		}
+
+		/*.textbox{
+			width: 70%;
+			height: 500px;
+			text-align: top;
+			font-size: 16px;
+			border-radius: 10px;
+			color: black;
+		}*/
+
+		.divtext{
+			width: 70%;
+			height: 400px;
+			font-size: 14px;
+			border-radius: 10px;
+			color: black;
+			background: white;
+			margin-left: 13%;
+			text-align:left;
+			padding: 2%;
+			font-weight: normal;
+			overflow-y: auto;
+		}
+
+		.btn2{
+			background-color: #1abc9c;
+			padding: 5px 9px;
+			text-align: center;
+			display: inline-block;
+			cursor: pointer;
+			border: none;
+			margin: 4px 0px;
+			border-radius: 4px;
+			vertical-align: bottom;
+			margin-bottom: 10px;
+		}
+
+		.btn2:hover{
+			border: 2px solid white;
+		}
+
+		.highlight{
+			background-color: orange;
+			border-style: solid;
+			border-width: 2px;
+			border-color: white;
+			
+		}
+
+
+		.unbold{
+			font-weight: bold;
+		}
+
+		.un-underline{
+			text-decoration: underline;
+		}
+
+		.un-italic{
+			font-style: italic;
+		}
+
+		.f11{
+			font-size: 11px;
+		}
+
+		/*.header{
+			position: absolute;
+			float: left;
+			margin: 0;
+		}*/
+
+	</style>
+
+
+	
+</head>
+<body>
+	
+<div>
+	<h1 class="header">Text Editor &nbsp v1.0</h1>
+</div>
+
+<div id="wrapper">
+	<div>
+		<span class="color-picker"></span>
+
+		<br/><br/>
+
+		<span class="dropdown small">
+		    <select id="ftype">    
+		        <option>Font Type</option>
+		        <option value="Helvetica">Helvetica</option>  
+		        <option value="Calibri">Calibri</option>
+		        <option value="Gothic">Gothic</option>
+		        <option value="Aerial">Aerial</option>
+		        <option value="Al Blanca">Al Blanca</option>
+		        <option value=""></option>
+		        <option value=""></option>
+		        <option value=""></option>
+		        <option value=""></option>
+		        <option value=""></option>
+		        <option value=""></option>
+		    </select>
+		</span>
+
+		<span class="dropdown small" >
+		    <select id="fsize">
+		        <option>Font size</option>
+		        <option value="1">11</option>
+		        <option value="2">12</option>
+		        <option value="3">14</option>
+		        <option value="4">16</option>
+		        <option value="5">24</option>
+		        <option value="6">32</option>
+		        <option value="7">44</option>
+		    </select>
+		</span>
+
+		<span class="dropdown small">
+		    <select id="talign">
+		        <option>Text Align</option>
+		        <option value="justifyLeft">Left</option>  
+		        <option value="justifyFull">Full</option>
+		        <option value="justifyRight">Right</option>
+		        <option value="justifyCenter">Center</option>
+		    </select>
+		</span>
+
+		<span class="dropdown small">
+		    <select id="others">
+		        <option>Others</option>
+		        <option value="removeFormat">Remove Format</option>
+		        <option value="strikeThrough">Strikethrough</option>  
+		        <option value="subscript">Subscript</option>
+		        <option value="superscript">Superscript</option>
+		        <option value="indent">Indent</option>
+		        <option value="outdent">Outdent</option>
+		    </select>
+		</span>
+
+		<span>
+			&nbsp&nbsp<button  class="btn" id="bolds"><b>B</b></button>
+		</span>
+
+		<span>
+			<button  class="btn" id="underline"><b><u>U</u><b></button>
+		</span>
+
+		<span>
+			<button class="btn" id="italics"><b><i>I</i><b></button>
+		</span>
+
+		<span>
+			 &nbsp&nbspH:<input type="color" name="" id="highlighter"  class="btn2">
+		</span>
+
+		<span>
+			 F:<input type="color" name="" id="fcolor"  class="btn2">
+		</span>
+
+		<span>
+			 B:<input type="color" name="" id="bcolor"  class="btn2">
+		</span>
+	</div>
+
+	<div  contenteditable="" class="divtext" id="me">
+		<!-- <textarea placeholder="Enter your text here ..." class="textbox"></textarea>  -->
+	</div>
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+	$('document').ready(function() {
+		// $('#textbox').css('width', 900);
+
+		// $('#textbox').css('margin', 'auto');
+		// $('#textbox').css('background-color', 'grey');
+
+		// $('#textbox').css({
+		// 	'width': 300, 'background-color': 'grey'
+		// });
+
+		// $('textarea').val('write here');
+		// $('textarea').html('write there');
+
+		$('#highlighter, #fcolor, #bcolor').css({
+			'padding': 0,
+			'width': 25,
+			'height': 25,
+		});
+
+		$('.btn').click(function () {
+			$(this).toggleClass('highlight');
+		});
+
+		$('#bolds').click(function(){
+			document.execCommand('bold');
+			// $('.divtext').toggleClass('unbold');
+		});
+
+		$('#underline').click(function(){
+			document.execCommand('underline');
+			// $('.textbox').toggleClass('un-underline');
+		});
+
+		$('#italics').click(function(){
+			document.execCommand('italic');
+			// $('.textbox').toggleClass('un-italic');
+		});
+
+		$('#highlighter').change(function(){
+			var c = document.getElementById('highlighter').value;
+			document.execCommand('hiliteColor', false, c)	;
+		});
+
+		$('#fcolor').change(function(){
+			var c = document.getElementById('fcolor').value;
+			document.execCommand('foreColor', false, c)	;
+		});
+
+		$('#bcolor').change(function(){
+			var c = document.getElementById('bcolor').value;
+			$('#me').css('background-color', c);
+		});
+		
+
+		$('#fsize').change(function(){
+			var a = document.getElementById('fsize').value;
+			document.execCommand('fontSize', false, a);
+		});
+
+		$('#ftype').change(function(){
+			var a = document.getElementById('ftype').value;
+			document.execCommand('fontName', false, a);
+		});
+
+		$('#talign').change(function(){
+			var a = $("#talign option:selected").attr('value');
+			// document.getElementById('talign').value;
+			switch (a) {
+						case 'justifyCenter':
+						document.execCommand('justifyCenter');
+						break;
+
+						case 'justifyRight':
+						document.execCommand('justifyRight');
+						break;
+
+						case 'justifyFull':
+						document.execCommand('justifyFull');
+						break;
+
+						case 'justifyLeft':
+						document.execCommand('justifyLeft');
+						break;
+						};
+		});
+
+		$('#others').change(function(){
+			var a = $("#others option:selected").attr('value');
+			// document.getElementById('talign').value;
+			switch (a) {
+						case 'removeFormat':
+						document.execCommand('removeFormat');
+						break;
+
+						case 'strikeThrough':
+						document.execCommand('strikeThrough');
+						break;
+
+						case 'subscript':
+						document.execCommand('subscript');
+						break;
+
+						case 'superscript':
+						document.execCommand('superscript');
+						break;
+
+						case 'indent':
+						document.execCommand('indent');
+						break;
+
+						case 'outdent':
+						document.execCommand('outdent');
+						break;
+						};
+		});
+
+
+
+		// $('.fsize option:selected').change(function(){
+		// 	$(this).change(function(){
+		// 		$('.textbox').css('font-size', 11);
+		// 		$('.textbox').css('font-size', 12);
+
+		// });
+		// });
+
+		// $('.fsize').change(function() {
+		// 	var x =('.fsize option:selected')
+		// 	switch(x) {
+		// 		case '1':
+		// 		document.execCommand('fsize', false, '1')
+		// 		break;
+
+		// 		case '2':
+		// 		document.execCommand('fsize', false, '1')
+		// 		break;
+		// 	}
+		// });
+
+
+		
+
+
+	});
+</script>
